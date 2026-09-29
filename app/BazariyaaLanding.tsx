@@ -33,12 +33,12 @@ export type Product = {
 const faqs = [
   {
     q: "How is the Buy Score calculated?",
-    a: "The Buy Score blends verified review sentiment, value-for-money against similar products, price fairness versus history, warranty and long-term reliability signals into a single 0–100 number. Weights are published and identical for every product — brands cannot buy a better score.",
+    a: "The Buy Score blends verified review sentiment, value-for-money against similar products, price fairness versus history, warranty and long-term reliability signals into a single 0-100 number. Weights are published and identical for every product : brands cannot buy a better score.",
   },
   { q: "Do brands pay to rank higher?", a: "No. Placement is decided entirely by the Buy Score. No product, seller or brand can pay for a higher position anywhere on Bazariyaa." },
   { q: "How do you detect fake reviews?", a: "Every review is checked against purchase records, device fingerprints and language patterns to filter out incentivised, duplicate or bot-written reviews before it affects a score." },
   { q: "Where does the price history come from?", a: "We poll prices across major Indian retailers every hour and keep a running history for every product we track, going back to launch." },
-  { q: "Is Bazariyaa free to use?", a: "Yes — browsing, comparisons, price history and the newsletter are all free. We may earn a small commission if you buy through a retailer link, which never affects ranking." },
+  { q: "Is Bazariyaa free to use?", a: "Yes : browsing, comparisons, price history and the newsletter are all free. We may earn a small commission if you buy through a retailer link, which never affects ranking." },
 ];
 
 function BuyBadge({ score }: { score: number }) {
@@ -151,7 +151,7 @@ export default function BazariyaaLanding({ initialProducts = [] }: { initialProd
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 antialiased">
       <div className="bg-slate-900 py-2 text-center text-xs text-slate-200">
-        Get the Bazariyaa app — honest verdicts &amp; price drops in your pocket.
+        Get the Bazariyaa app : honest verdicts &amp; price drops in your pocket.
       </div>
 
       <header className="sticky top-0 z-30 border-b border-slate-100 bg-white/90 backdrop-blur">
@@ -188,7 +188,7 @@ export default function BazariyaaLanding({ initialProducts = [] }: { initialProd
             </h1>
             <p className="mt-5 max-w-md text-[15px] leading-relaxed text-slate-500">
               India&rsquo;s honest product-discovery platform. Real reviews, live price
-              history and a Buy Score you can trust — before you spend a rupee.
+              history and a Buy Score you can trust : before you spend a rupee.
             </p>
 
             <div id="search" className="relative mt-8 max-w-md z-40">
@@ -287,7 +287,7 @@ export default function BazariyaaLanding({ initialProducts = [] }: { initialProd
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-indigo-100">
                 Products graded by real reviews and live price
-                history — never by who pays.
+                history : never by who pays.
               </p>
             </div>
             <div className="mt-8 space-y-3">
@@ -359,7 +359,7 @@ export default function BazariyaaLanding({ initialProducts = [] }: { initialProd
             Three scores. Zero guesswork.
           </h2>
           <p className="mx-auto mb-10 max-w-md text-sm text-slate-500">
-            Every product is graded by the same transparent system — never by who pays us.
+            Every product is graded by the same transparent system : never by who pays us.
           </p>
           <div className="grid gap-4 text-left sm:grid-cols-3">
             <div className="rounded-2xl border border-slate-200 bg-white p-6">
@@ -367,7 +367,7 @@ export default function BazariyaaLanding({ initialProducts = [] }: { initialProd
               <div className="mb-1 text-3xl font-bold">94</div>
               <div className="mb-2 text-sm font-semibold">Review Trust Score</div>
               <p className="text-xs leading-relaxed text-slate-500">
-                What share of reviews are from genuine, verified buyers — with fake and
+                What share of reviews are from genuine, verified buyers : with fake and
                 coordinated reviews filtered out.
               </p>
             </div>
@@ -386,7 +386,7 @@ export default function BazariyaaLanding({ initialProducts = [] }: { initialProd
               <div className="mb-2 text-sm font-semibold">Buy Score</div>
               <p className="text-xs leading-relaxed text-slate-500">
                 One honest number combining trust, value, price fairness and reliability
-                — so you can decide in seconds.
+                : so you can decide in seconds.
               </p>
             </div>
           </div>
@@ -534,7 +534,7 @@ export default function BazariyaaLanding({ initialProducts = [] }: { initialProd
             <h2 className="text-xl font-bold sm:text-2xl">Buy smarter, every single time.</h2>
             <p className="mt-1 text-sm text-slate-300">
               Weekly price drops, honest verdicts and early access to the AI Buying
-              Assistant — straight to your inbox.
+              Assistant : straight to your inbox.
             </p>
           </div>
           <div className="flex w-full max-w-sm gap-2">
@@ -557,7 +557,7 @@ export default function BazariyaaLanding({ initialProducts = [] }: { initialProd
             <div className="mb-3 text-lg font-bold text-indigo-700">bazariyaa</div>
             <p className="max-w-xs text-sm leading-relaxed text-slate-500">
               India&rsquo;s honest product-discovery platform. We help you decide with
-              confidence — no paid rankings, ever.
+              confidence : no paid rankings, ever.
             </p>
           </div>
           <div>
