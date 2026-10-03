@@ -17,12 +17,27 @@ export type Product = {
   history: { date: string; price: number }[];
 };
 
+function parseBsonNumber(val: any): number {
+  if (val == null) return 0;
+  if (typeof val === 'number') return val;
+  if (typeof val === 'string') {
+    const parsed = parseFloat(val.replace(/[^0-9.-]+/g, ""));
+    return isNaN(parsed) ? 0 : parsed;
+  }
+  if (typeof val === 'object') {
+    if (val.$numberDouble !== undefined) return parseFloat(val.$numberDouble);
+    if (val.$numberInt !== undefined) return parseInt(val.$numberInt, 10);
+    if (val.$numberDecimal !== undefined) return parseFloat(val.$numberDecimal);
+  }
+  return 0;
+}
+
 export function normalizeAmazonData(raw: any, historyDoc: any): Product {
-  const priceVal = raw.price || raw.selected_variant?.price || 0;
-  const msrpVal = raw.msrp || raw.original_price || null;
+  const priceVal = parseBsonNumber(raw.price ?? raw.selected_variant?.price);
+  const msrpVal = parseBsonNumber(raw.msrp ?? raw.original_price);
   
   const rawHistory = historyDoc?.history || [];
-  const historyPrices = rawHistory.map((h: any) => h.price);
+  const historyPrices = rawHistory.map((h: any) => parseBsonNumber(h.price));
   const lastPrice = historyPrices.length > 1 ? historyPrices[historyPrices.length - 2] : priceVal;
   
   let trend: "up" | "down" | "flat" = "flat";
@@ -44,7 +59,7 @@ export function normalizeAmazonData(raw: any, historyDoc: any): Product {
 
   const history = rawHistory.map((h: any) => ({
     date: h.timestamp?.$date || h.timestamp || new Date().toISOString(),
-    price: h.price
+    price: parseBsonNumber(h.price)
   }));
 
   return {
@@ -58,7 +73,7 @@ export function normalizeAmazonData(raw: any, historyDoc: any): Product {
     real: "90%",
     price: `${raw.currency_code || 'AED'} ${priceVal}`,
     numericPrice: priceVal,
-    was: msrpVal ? `${raw.currency_code || 'AED'} ${msrpVal}` : undefined,
+    was: msrpVal > 0 ? `${raw.currency_code || 'AED'} ${msrpVal}` : undefined,
     trend: trend,
     cta: "view",
     images: raw.main_image ? [raw.main_image] : [],
@@ -68,11 +83,11 @@ export function normalizeAmazonData(raw: any, historyDoc: any): Product {
 }
 
 export function normalizeSharafDGData(raw: any, historyDoc: any): Product {
-  const priceVal = raw.sale_price || raw.price || 0;
-  const msrpVal = raw.msrp || raw.original_price || null;
+  const priceVal = parseBsonNumber(raw.sale_price ?? raw.price);
+  const msrpVal = parseBsonNumber(raw.msrp ?? raw.original_price);
   
   const rawHistory = historyDoc?.history || [];
-  const historyPrices = rawHistory.map((h: any) => h.price);
+  const historyPrices = rawHistory.map((h: any) => parseBsonNumber(h.price));
   const lastPrice = historyPrices.length > 1 ? historyPrices[historyPrices.length - 2] : priceVal;
   
   let trend: "up" | "down" | "flat" = "flat";
@@ -89,7 +104,7 @@ export function normalizeSharafDGData(raw: any, historyDoc: any): Product {
 
   const history = rawHistory.map((h: any) => ({
     date: h.timestamp?.$date || h.timestamp || new Date().toISOString(),
-    price: h.price
+    price: parseBsonNumber(h.price)
   }));
 
   return {
@@ -103,7 +118,7 @@ export function normalizeSharafDGData(raw: any, historyDoc: any): Product {
     real: "90%",
     price: `${raw.currency || 'AED'} ${priceVal}`,
     numericPrice: priceVal,
-    was: msrpVal ? `${raw.currency || 'AED'} ${msrpVal}` : undefined,
+    was: msrpVal > 0 ? `${raw.currency || 'AED'} ${msrpVal}` : undefined,
     trend: trend,
     cta: "view",
     images: raw.images || (raw.product_image ? [raw.product_image] : []),

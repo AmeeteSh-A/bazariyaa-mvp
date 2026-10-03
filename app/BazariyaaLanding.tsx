@@ -58,7 +58,7 @@ function TrendArrow({ dir }: { dir?: "up" | "down" | "flat" }) {
 
 function ProductCard({ p }: { p: Product }) {
   return (
-    <Link href={`/product/${p.id}`} className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-3 transition hover:border-indigo-200 hover:shadow-md">
+    <Link href={`/product/${encodeURIComponent(p.id)}`} className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-3 transition hover:border-indigo-200 hover:shadow-md">
       <div className="relative mb-3 flex h-32 items-center justify-center rounded-xl bg-slate-100 p-4 text-center">
         <Package className="h-10 w-10 text-slate-300" strokeWidth={1} />
         <div className="absolute top-2 left-2">
